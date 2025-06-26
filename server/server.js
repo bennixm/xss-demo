@@ -11,7 +11,7 @@ app.use(cors({
 app.use(express.json())
 
 app.post('/comment', (req, res) => {
-  res.cookie('session_id_secure', 'secure_abc123', {
+  res.cookie('session_id_secure', 'secure_token', {
     httpOnly: true,
     sameSite: 'Lax',
     secure: false 
@@ -21,7 +21,7 @@ app.post('/comment', (req, res) => {
 })
 
 app.post('/insecure-comment', (req, res) => {
-  res.cookie('session_id_insecure', 'vulnerable_xyz456', {
+  res.cookie('session_id_insecure', 'vulnerable_token', {
     httpOnly: false,
     sameSite: 'Lax',
     secure: false
