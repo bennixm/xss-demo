@@ -10,21 +10,19 @@ app.use(cors({
 }))
 app.use(express.json())
 
-// Simulate secure app with HttpOnly cookie
 app.post('/comment', (req, res) => {
   res.cookie('session_id_secure', 'secure_abc123', {
     httpOnly: true,
     sameSite: 'Lax',
-    secure: false // Use true in production with HTTPS
+    secure: false 
   })
   console.log('[SECURE] Comment received:', req.body.content)
   res.send({ status: 'Secure comment received' })
 })
 
-// Simulate vulnerable app with accessible cookie
 app.post('/insecure-comment', (req, res) => {
   res.cookie('session_id_insecure', 'vulnerable_xyz456', {
-    httpOnly: false, // ❌ Not protected
+    httpOnly: false,
     sameSite: 'Lax',
     secure: false
   })
